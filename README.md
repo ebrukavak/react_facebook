@@ -10,7 +10,7 @@ This will create a new directory my-react-app with the necessary files and depen
 
 Create a Dockerfile in the project's root directory:
 
-`apiVersion: v1
+```apiVersion: v1
 kind: Service
 metadata:
   name: my-api-service
@@ -22,7 +22,7 @@ spec:
     port: 80
     targetPort: 3000
     nodePort: 30000
-  type: NodePort`
+  type: NodePort```
 
 This Dockerfile builds the React.js app using a Node.js Alpine image, copies the necessary files, and then copies the built files into an Nginx Alpine image for serving.
 
