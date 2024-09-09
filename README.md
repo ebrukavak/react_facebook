@@ -22,7 +22,7 @@ spec:
     port: 80
     targetPort: 3000
     nodePort: 30000
-  type: NodePort```
+  type: NodePort ```
 
 This Dockerfile builds the React.js app using a Node.js Alpine image, copies the necessary files, and then copies the built files into an Nginx Alpine image for serving.
 
