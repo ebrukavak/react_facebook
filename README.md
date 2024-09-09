@@ -191,7 +191,7 @@ spec:
         image: agoksal19/reactapp
         ports:
         - containerPort: 3000 
- -----
+
 apiVersion: v1
 kind: Service
 metadata:
