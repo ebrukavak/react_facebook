@@ -49,8 +49,8 @@ Creating an ECS Cluster:
 1. Log in to the AWS Management Console: Access the AWS Management Console and navigate to the ECS service.
 2. Create a New Cluster: Click the "Create cluster" button.
 3. Name Your Cluster and Configure Settings: Give your cluster a name and select the necessary settings (e.g., VPC, security groups, capacity providers).
+4. Create a Fargate Task Definition:
 
-#4. Create a Fargate Task Definition:
 1.Click "Create task definition" in the ECS console.
 2.Choose an Image: Select the Docker image you want to use (e.g., from an ECR repository or a public Docker registry).
 3. Configure Resources: Specify the required CPU and memory for the task.
