@@ -37,7 +37,8 @@ Scanning: Regularly scan your image for vulnerabilities using tools like docker 
 
 4. Deploy to AWS:
    Create a Terraform configuration file (main.tf) to provision the infrastructure:
-```terraform {
+```
+terraform {
 required_providers {
 aws = {
 source = "hashicorp/aws"
@@ -206,8 +207,9 @@ spec:
     targetPort: 3000
     nodePort: 30000
   type: NodePort`
-
+```
 Apply the manifest files to your Kubernetes cluster:
+
 `kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml`
 
@@ -215,6 +217,7 @@ kubectl apply -f service.yaml`
 6.Creating a Helm Chart
 
 To create a Helm chart for this application, follow these steps:
+
 `helm create my-chart`
 
 Customize the values.yaml file:
@@ -224,16 +227,19 @@ Modify the templates directory:
 The templates directory contains the Kubernetes manifests (Deployment, Service, etc.) that define your application. Customize these templates to match your application's architecture.
 
 Package the chart:
+
 `helm package my-chart`
 
 Installing the Chart
 To install the chart into your Kubernetes cluster:
+
 `helm install my-release my-chart.tgz`
 
 Replace my-release with the desired release name.
 
 Customizing the Installation
 You can customize the installation by passing values to the helm install command:
+
 `helm install my-release my-chart.tgz --set image.tag=v1.2.3`
 
 
