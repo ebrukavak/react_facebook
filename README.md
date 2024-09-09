@@ -50,16 +50,34 @@ Creating an ECS Cluster:
 2. Create a New Cluster: Click the "Create cluster" button.
 3. Name Your Cluster and Configure Settings: Give your cluster a name and select the necessary settings (e.g., VPC, security groups, capacity providers).
 
-4. Create a Fargate Task Definition: Click "Create task definition" in the ECS console.2. Choose an Image: Select the Docker image you want to use (e.g., from an ECR repository or a public Docker registry).3. Configure Resources: Specify the required CPU and memory for the task.4. Map Ports: Define the ports that the container will listen on.5. Add Environment Variables (Optional): Add any necessary environment variables.
+#4. Create a Fargate Task Definition:
+1.Click "Create task definition" in the ECS console.
+2.Choose an Image: Select the Docker image you want to use (e.g., from an ECR repository or a public Docker registry).
+3. Configure Resources: Specify the required CPU and memory for the task.
+4. Map Ports: Define the ports that the container will listen on.
+5. Add Environment Variables (Optional): Add any necessary environment variables.
 
-5.  Create a Service: Click "Create service" in the ECS console.2. Select Task Definition: Choose the task definition you created.3. Name Your Service and Configure Settings: Give your service a name and configure otional settings like scaling, health checks.4. Specify Target Group: Indicate the target group where the service will be routed.5. Create a Load Balancer (Optional): If you need a load balancer, configure the necessary settings.
+5.  Create a Service:
+1. Click "Create service" in the ECS console.
+2. Select Task Definition: Choose the task definition you created.
+3. Name Your Service and Configure Settings: Give your service a name and configure otional settings like scaling, health checks.
+4. Specify Target Group: Indicate the target group where the service will be routed.
+5. Create a Load Balancer (Optional): If you need a load balancer, configure the necessary settings.
 
 6. Create a Load Balancer (Optional):
-1. Create a Load Balancer: Go to the EC2 console and create a load balancer.2. Create a Target Group: Create a target group to route traffic from the load balancer.3. Register Service with Target Group: Add your service to the target group.
+1. Create a Load Balancer: Go to the EC2 console and create a load balancer.
+2. Create a Target Group: Create a target group to route traffic from the load balancer.
+3. Register Service with Target Group: Add your service to the target group.
 
-7. Create a Security Group: Create a Security Group: Create a security group in the EC2 console.2. Add Permissions: Add inbound and outbound rules (e.g., allow HTTP traffic on port 80).3. Attach to ECS Resources: Attach the security group to your ECS cluster and service.
+7. Create a Security Group:
+1. Create a Security Group: Create a security group in the EC2 console.
+2. Add Permissions: Add inbound and outbound rules (e.g., allow HTTP traffic on port 80).
+3. Attach to ECS Resources: Attach the security group to your ECS cluster and service.
 
-8. Build and Push a Docker Image (Optional): Create a Dockerfile: Create a Dockerfile for your application.2. Build the Image: Build the image using the docker build command.3. Push to ECR: Push the image to your ECR repository using the docker push command.
+8. Build and Push a Docker Image (Optional):
+1.Create a Dockerfile: Create a Dockerfile for your application.
+2. Build the Image: Build the image using the docker build command.
+3. Push to ECR: Push the image to your ECR repository using the docker push command.
 ```
 5. Deploy to Kubernetes:
 
