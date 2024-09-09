@@ -2,7 +2,7 @@
 
 Use a tool like Create React App to generate a basic React.js application:
 
-`npx create-react-app my-react-app
+`npx create-react-app my-react-app`
 
 This will create a new directory my-react-app with the necessary files and dependencies.
 
