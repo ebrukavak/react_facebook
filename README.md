@@ -104,18 +104,9 @@ memory = 512
 container_definitions = jsonencode([{
 name = "my-react-app"
 image = "aws 
-e
-​
- cr 
-r
-​
- epository.my 
-r
-​
- epo.repository 
-u
-​
- ri:{aws_ecr_image.my_image.image_tag}"
+ecr 
+repository.myrepo.repository 
+uri:{aws_ecr_image.my_image.image_tag}"
 portMappings = [{
 containerPort = 80
 hostPort = 80
@@ -158,15 +149,18 @@ port = 80
 protocol = "tcp"
 target_type = "ip"
 } 
-
+````
 Create an AWS ECR repository:
+
 `aws ecr create-repository --repository-name my-repo`
 
 Push your Docker image to the repository:
+
 `aws ecr get-login-password | docker login --username AWS --password-stdin <account_id>.dkr.ecr.<region>[invalid URL removed]
 docker push <account_id>.dkr.ecr.<region>[invalid URL removed]`
 
 Run`bash
+
 `terraform init
 terraform apply`
 
@@ -174,7 +168,8 @@ terraform apply`
 
 Create Kubernetes manifest files:
 
-`apiVersion: apps/v1
+```
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-api
@@ -192,9 +187,11 @@ spec:
       - name: my-api
         image: agoksal19/reactapp
         ports:
-        - containerPort: 3000`
+        - containerPort: 3000
+```
 
-`apiVersion: v1
+```
+apiVersion: v1
 kind: Service
 metadata:
   name: my-api-service
@@ -206,8 +203,9 @@ spec:
     port: 80
     targetPort: 3000
     nodePort: 30000
-  type: NodePort`
+  type: NodePort
 ```
+
 Apply the manifest files to your Kubernetes cluster:
 
 `kubectl apply -f deployment.yaml
