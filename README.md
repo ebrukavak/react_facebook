@@ -44,134 +44,23 @@ Authentication: Use authentication mechanisms like Docker Hub or private registr
 Scanning: Regularly scan your image for vulnerabilities using tools like docker scan.
 
 4. Deploy to AWS:
-   Create a Terraform configuration file (main.tf) to provision the infrastructure:
 ```
-terraform {
-required_providers {
-aws = {
-source = "hashicorp/aws"
-version = "~> 4.0"
-}
-}
-}
+Creating an ECS Cluster:
+1. Log in to the AWS Management Console: Access the AWS Management Console and navigate to the ECS service.
+2. Create a New Cluster: Click the "Create cluster" button.
+3. Name Your Cluster and Configure Settings: Give your cluster a name and select the necessary settings (e.g., VPC, security groups, capacity providers).
 
-provider "aws" {
-region = "us-east-1" # Replace with your desired region
-}   
+4. Create a Fargate Task Definition: Click "Create task definition" in the ECS console.2. Choose an Image: Select the Docker image you want to use (e.g., from an ECR repository or a public Docker registry).3. Configure Resources: Specify the required CPU and memory for the task.4. Map Ports: Define the ports that the container will listen on.5. Add Environment Variables (Optional): Add any necessary environment variables.
 
-resource "aws_vpc" "my_vpc" {
-cidr_block = "10.0.0.0/16"
-}
+5.  Create a Service: Click "Create service" in the ECS console.2. Select Task Definition: Choose the task definition you created.3. Name Your Service and Configure Settings: Give your service a name and configure otional settings like scaling, health checks.4. Specify Target Group: Indicate the target group where the service will be routed.5. Create a Load Balancer (Optional): If you need a load balancer, configure the necessary settings.
 
-resource "aws_internet_gateway" "my_ig" {
-vpc_id = aws_vpc.my_vpc.id
-}
+6. Create a Load Balancer (Optional):
+1. Create a Load Balancer: Go to the EC2 console and create a load balancer.2. Create a Target Group: Create a target group to route traffic from the load balancer.3. Register Service with Target Group: Add your service to the target group.
 
-resource "aws_route_table" "my_rt" {
-vpc_id = aws_vpc.my_vpc.id   
+7. Create a Security Group: Create a Security Group: Create a security group in the EC2 console.2. Add Permissions: Add inbound and outbound rules (e.g., allow HTTP traffic on port 80).3. Attach to ECS Resources: Attach the security group to your ECS cluster and service.
 
-route {
-cidr_block = "0.0.0.0/0"
-gateway_id = aws_internet_gateway.my_ig.id
-}
-}   
-
-resource "aws_subnet" "public_subnet1" {
-vpc_id = aws_vpc.my_vpc.id
-cidr_block = "10.0.0.0/24"
-availability_zone = "us-east-1a"
-}
-
-resource "aws_subnet" "public_subnet2" {
-vpc_id = aws_vpc.my_vpc.id
-cidr_block = "10.0.0.1/24"
-availability_zone = "us-east-1b"
-}
-
-resource "aws_security_group" "my_sg" {
-name = "my-security-group"
-vpc_id = aws_vpc.my_vpc.id
-
-ingress {
-from_port = 80
-to_port = 80
-protocol = "tcp"
-cidr_blocks = ["0.0.0.0/0"]
-}
-}
-
-resource "aws_ecs_cluster" "my_cluster" {
-name = "my-ecs-cluster"
-}
-
-resource "aws_ecs_task_definition" "my_task" {
-family = "my-react-app"
-cpu = 256
-memory = 512
-
-container_definitions = jsonencode([{
-name = "my-react-app"
-image = "aws 
-ecr 
-repository.myrepo.repository 
-uri:{aws_ecr_image.my_image.image_tag}"
-portMappings = [{
-containerPort = 80
-hostPort = 80
-}]
-}])
-
-}
-
-resource "aws_ecs_service" "my_service" {
-cluster = aws_ecs_cluster.my_cluster.name
-desired_count = 1
-task_definition = aws_ecs_task_definition.my_task.arn
-
-network_configuration {
-subnets = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id]
-security_groups = [aws_security_group.my_sg.id]
-}   
-
-}
-
-resource "aws_lb" "my_lb" {
-name = "my-load-balancer"
-subnets = [aws_subnet.public_subnet1.id, aws_subnet.public_subnet2.id]
-security_groups = [aws_security_group.my_sg.id]
-
-listener {
-port = 80
-protocol = "tcp"
-default_action {
-target_group {
-arn = aws_lb_target_group.my_tg.arn
-}
-}
-}
-}
-
-resource "aws_lb_target_group" "my_tg" {
-name = "my-target-group"
-port = 80
-protocol = "tcp"
-target_type = "ip"
-} 
-````
-Create an AWS ECR repository:
-
-`aws ecr create-repository --repository-name my-repo`
-
-Push your Docker image to the repository:
-
-`aws ecr get-login-password | docker login --username AWS --password-stdin <account_id>.dkr.ecr.<region>[invalid URL removed]
-docker push <account_id>.dkr.ecr.<region>[invalid URL removed]`
-
-Run`bash
-
-`terraform init
-terraform apply`
-
+8. Build and Push a Docker Image (Optional): Create a Dockerfile: Create a Dockerfile for your application.2. Build the Image: Build the image using the docker build command.3. Push to ECR: Push the image to your ECR repository using the docker push command.
+```
 5. Deploy to Kubernetes:
 
 Create Kubernetes manifest files:
