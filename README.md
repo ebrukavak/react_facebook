@@ -36,7 +36,7 @@ Scanning: Regularly scan your image for vulnerabilities using tools like docker 
 
 4. Deploy to AWS:
    Create a Terraform configuration file (main.tf) to provision the infrastructure:
-`  ``terraform {
+```terraform {
 required_providers {
 aws = {
 source = "hashicorp/aws"
@@ -155,7 +155,7 @@ name = "my-target-group"
 port = 80
 protocol = "tcp"
 target_type = "ip"
-} `
+} 
 
 Create an AWS ECR repository:
 `aws ecr create-repository --repository-name my-repo`
