@@ -1,10 +1,18 @@
 1. Create a Basic React.js App:
 
+Create a basic React.js app by following tha Facebook's documentation.
+
+`https://github.com/facebook/create-react-app.git`
+
 Use a tool like Create React App to generate a basic React.js application:
 
-`npx create-react-app my-react-app`
+```
+npx create-react-app my-app
+cd my-app
+npm start
+```
 
-This will create a new directory my-react-app with the necessary files and dependencies.
+This will create a new directory my-app with the necessary files and dependencies.
 
 2. Create a Dockerfile:
 
