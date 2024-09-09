@@ -10,7 +10,7 @@ This will create a new directory my-react-app with the necessary files and depen
 
 Create a Dockerfile in the project's root directory:
 
-apiVersion: v1
+`apiVersion: v1
 kind: Service
 metadata:
   name: my-api-service
@@ -22,7 +22,7 @@ spec:
     port: 80
     targetPort: 3000
     nodePort: 30000
-  type: NodePort
+  type: NodePort`
 
 This Dockerfile builds the React.js app using a Node.js Alpine image, copies the necessary files, and then copies the built files into an Nginx Alpine image for serving.
 
@@ -36,7 +36,7 @@ Scanning: Regularly scan your image for vulnerabilities using tools like docker 
 
 4. Deploy to AWS:
    Create a Terraform configuration file (main.tf) to provision the infrastructure:
-   ``terraform {
+`  ``terraform {
 required_providers {
 aws = {
 source = "hashicorp/aws"
@@ -155,24 +155,24 @@ name = "my-target-group"
 port = 80
 protocol = "tcp"
 target_type = "ip"
-}
+} `
 
 Create an AWS ECR repository:
-aws ecr create-repository --repository-name my-repo
+`aws ecr create-repository --repository-name my-repo`
 
 Push your Docker image to the repository:
-aws ecr get-login-password | docker login --username AWS --password-stdin <account_id>.dkr.ecr.<region>[invalid URL removed]
-docker push <account_id>.dkr.ecr.<region>[invalid URL removed]
+`aws ecr get-login-password | docker login --username AWS --password-stdin <account_id>.dkr.ecr.<region>[invalid URL removed]
+docker push <account_id>.dkr.ecr.<region>[invalid URL removed]`
 
 Run`bash
-terraform init
-terraform apply
+`terraform init
+terraform apply`
 
 5. Deploy to Kubernetes:
 
 Create Kubernetes manifest files:
 
-apiVersion: apps/v1
+`apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-api
@@ -190,9 +190,9 @@ spec:
       - name: my-api
         image: agoksal19/reactapp
         ports:
-        - containerPort: 3000 
+        - containerPort: 3000`
 
-apiVersion: v1
+`apiVersion: v1
 kind: Service
 metadata:
   name: my-api-service
@@ -204,17 +204,17 @@ spec:
     port: 80
     targetPort: 3000
     nodePort: 30000
-  type: NodePort
+  type: NodePort`
 
 Apply the manifest files to your Kubernetes cluster:
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+`kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml`
 
 
 6.Creating a Helm Chart
 
 To create a Helm chart for this application, follow these steps:
-helm create my-chart
+`helm create my-chart`
 
 Customize the values.yaml file:
 The values.yaml file contains the default values for your chart. Customize it to match your application's specific requirements. For example, you might want to set default values for image tags, resource limits, and environment variables.
@@ -223,17 +223,17 @@ Modify the templates directory:
 The templates directory contains the Kubernetes manifests (Deployment, Service, etc.) that define your application. Customize these templates to match your application's architecture.
 
 Package the chart:
-helm package my-chart
+`helm package my-chart`
 
 Installing the Chart
 To install the chart into your Kubernetes cluster:
-helm install my-release my-chart.tgz
+`helm install my-release my-chart.tgz`
 
 Replace my-release with the desired release name.
 
 Customizing the Installation
 You can customize the installation by passing values to the helm install command:
-helm install my-release my-chart.tgz --set image.tag=v1.2.3
+`helm install my-release my-chart.tgz --set image.tag=v1.2.3`
 
 
 
